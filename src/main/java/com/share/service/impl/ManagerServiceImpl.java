@@ -18,4 +18,9 @@ public class ManagerServiceImpl implements IManagerService{
     public Manager login(Manager manager) {
         return managerMapper.login(manager);
     }
+
+    @Override
+    public Integer signUp(Manager manager) {
+        return managerMapper.signUp(manager);
+    }
 }

@@ -41,6 +41,22 @@ public class ManagerController {
             logger.error("0");
             return "0";
         }
+    }
+    //管理员注册
+    @RequestMapping(value = "/signUp.from",method = RequestMethod.POST,produces = "application/json; charset=utf-8")
+    public @ResponseBody
+    Object managerSignUp(HttpServletRequest request, HttpServletResponse response ){
+        String name=request.getParameter("name").trim();
+        String pwd=request.getParameter("pwd").trim();
+        manager=new Manager();
+        manager.setMname(name);
+        manager.setMpassword(pwd);
+        Integer num=managerService.signUp(manager);
 
+        if (num==1){
+            return "sign up success";
+        }else {
+            return "sign up fail";
+        }
     }
 }

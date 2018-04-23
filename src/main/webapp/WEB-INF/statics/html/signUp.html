@@ -2,42 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>登录</title>
+    <title>注册</title>
     <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
 管理员:<input type="text" placeholder="手机号码/邮箱" id="name"/><br>
 <div id="res" style="color: red"></div>
 密码：<input type="password" placeholder="请输入密码" id="pwd"/><br>
-登录：<input type="button" value="登录" onclick="login()"/><br>
-注册：<input type="button" value="注册" onclick="window.location='signUp.html'"/><br>
-
+注册：<input type="button" value="注册" onclick="signUp()"/><br>
 </body>
-
 <script type="text/javascript">
-
-    function login() {
+    function signUp() {
         var name = $("#name").val();
         var pwd = $("#pwd").val();
-        console.log(name);
-        console.log(pwd);
         $.ajax({
             type: "post",
-            url: "/share/login.from?name=" + name.trim() + "&pwd=" + pwd.trim(),
+            url: "/share/signUp.from?name=" + name.trim() + "&pwd=" + pwd.trim(),
             dataType: "html",
             success: function (msg) {
-                if (msg == "1") {
-                    window.location.href = 'ManagerPage.html';
-                    alert("登录成功");
+                if (msg == "sign up success") {
+                    window.location.href = 'login.html';
+                    alert("注册成功");
                 }
                 else {
-                    alert("登录失败");
+                    alert("注册失败");
                 }
             }
-
         })
     }
-
 </script>
-
 </html>

@@ -10,7 +10,19 @@
     </resultMap>
 
     <select id="login" parameterType="com.share.pojo.Manager" resultMap="ManagerInfoResult">
-        select * from Manager where mname=#{mname} and mpassword=#{mpassword}
+        select *
+        from
+        Manager
+        where
+        mname=#{mname} and mpassword=#{mpassword}
     </select>
+
+    <insert id="signUp" parameterType="com.share.pojo.Manager">
+        INSERT INTO
+        Manager
+        (mname,mpassword)
+        VALUES
+        (#{mname},#{mpassword})
+    </insert>
 
 </mapper>

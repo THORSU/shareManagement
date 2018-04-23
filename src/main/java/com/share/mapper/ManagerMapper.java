@@ -13,4 +13,11 @@ public interface ManagerMapper {
      * @return
      */
     public Manager login(Manager manager);
+
+    /**
+     * 管理员注册
+     * @param manager
+     * @return
+     */
+    public Integer signUp(Manager manager);
 }
