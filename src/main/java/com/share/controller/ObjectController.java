@@ -14,4 +14,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/object")
 public class ObjectController {
     private static Logger logger=Logger.getLogger(ObjectController.class);
+
 }

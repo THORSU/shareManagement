@@ -18,6 +18,14 @@
         var name=$("#name").val();
         var price=$("price").val();
         var remark=$("remark").val();
+        $.ajax({
+            type:"post",
+            url:"/object/addObject.from?code="+code.trim()+"&name="+name.trim()+"&price="+price.trim()+"&remark="+remark.trim(),
+            dataType:"html",
+            success:function (msg) {
+
+            }
+        })
     }
 </script>
 </html>
