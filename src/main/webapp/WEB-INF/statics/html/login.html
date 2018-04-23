@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+管理员:<input type="text" placeholder="手机号码/邮箱" id="name"/><br>
+<div id="res" style="color: red"></div>
+密码：<input type="password" placeholder="请输入密码" id="pwd"/><br>
+登录：<input type="button" value="登录" onclick="login()"/><br>
+
+</body>
+
+<script type="text/javascript">
+    function login() {
+        var name = $("#name").val();
+        var pwd = $("#pwd").val();
+        console.log(name);
+        console.log(pwd);
+        $.ajax({
+            type: "post",
+            url: "/manager/login.from?name=" + name.trim() + "&pwd=" + pwd.trim(),
+            dataType: "html",
+            success: function (msg) {
+                if (msg == "1") {
+                    // window.location.href = 'ManagerPage.html';
+                    alert("success");
+                }
+                else {
+                    alert("fail");
+                }
+            }
+
+        })
+    }
+
+</script>
+
+</html>
