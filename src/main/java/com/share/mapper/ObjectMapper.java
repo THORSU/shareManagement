@@ -12,5 +12,5 @@ public interface ObjectMapper {
      * @param object_1
      * @return
      */
-    public Object_1 addObject(Object_1 object_1);
+    public Integer addObject(Object_1 object_1);
 }
