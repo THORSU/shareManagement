@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS Manager;
+CREATE TABLE Manager
+(
+  mid       INT (11) NOT NULL AUTO_INCREMENT
+    PRIMARY KEY,
+  mname     VARCHAR(20)  NOT NULL,
+  mpassword VARCHAR(20)  NULL
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT=1
+  COLLATE = utf8_unicode_ci
+  COMMENT='管理员';
