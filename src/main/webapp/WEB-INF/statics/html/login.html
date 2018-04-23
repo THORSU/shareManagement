@@ -21,7 +21,7 @@
         console.log(pwd);
         $.ajax({
             type: "post",
-            url: "/manager/login.from?name=" + name.trim() + "&pwd=" + pwd.trim(),
+            url: "/share/login.from?name=" + name.trim() + "&pwd=" + pwd.trim(),
             dataType: "html",
             success: function (msg) {
                 if (msg == "1") {

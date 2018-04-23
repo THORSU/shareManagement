@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Date: 2018/4/23
  */
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/share")
 public class ManagerController {
     private static Logger logger=Logger.getLogger(ManagerController.class);
     @Autowired
