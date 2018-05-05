@@ -19,43 +19,42 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("/share")
 public class ManagerController {
-    private static Logger logger=Logger.getLogger(ManagerController.class);
+    private static Logger logger = Logger.getLogger(ManagerController.class);
     @Autowired
     private IManagerService managerService;
 
-    private Manager manager;
-    @RequestMapping(value = "/login.from",method = RequestMethod.POST,produces = "application/json; charset=utf-8")
+    //管理员登录
+    private Manager manager = new Manager();
+
+    @RequestMapping(value = "/login.from", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody
-    Object managerLogin(HttpServletRequest request, HttpServletResponse response ){
-        String name=request.getParameter("name").trim();
-        String pwd=request.getParameter("pwd").trim();
-        manager=new Manager();
+    Object managerLogin(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("name").trim();
+        String pwd = request.getParameter("pwd").trim();
         manager.setMname(name);
         manager.setMpassword(pwd);
-        Manager res=managerService.login(manager);
-        if(res!=null){
+        Manager res = managerService.login(manager);
+        if (res != null) {
             logger.info(res);
             return "1";
-        }
-        else{
+        } else {
             logger.error("0");
             return "0";
         }
     }
+
     //管理员注册
-    @RequestMapping(value = "/signUp.from",method = RequestMethod.POST,produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/signUp.from", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody
-    Object managerSignUp(HttpServletRequest request, HttpServletResponse response ){
-        String name=request.getParameter("name").trim();
-        String pwd=request.getParameter("pwd").trim();
-        manager=new Manager();
+    Object managerSignUp(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("name").trim();
+        String pwd = request.getParameter("pwd").trim();
         manager.setMname(name);
         manager.setMpassword(pwd);
-        Integer num=managerService.signUp(manager);
-
-        if (num==1){
+        Integer num = managerService.signUp(manager);
+        if (num == 1) {
             return "sign up success";
-        }else {
+        } else {
             return "sign up fail";
         }
     }

@@ -4,9 +4,13 @@ package com.share.pojo;
  * Created by weixin on 17-7-31.
  */
 public class User {
+    //id
     private String uid;
+    //用户名
     private String uname;
+    //密码
     private String upwd;
+
     private String alias;
     private String umobile;
     private String IDnumber;

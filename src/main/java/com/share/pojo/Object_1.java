@@ -4,11 +4,12 @@ package com.share.pojo;
  * Created by weixin on 17-8-6.
  */
 public class Object_1 {
+    //todo 此处设置了商品的id自增
     private String id;//产品id
     private String code;//产品编码
     private String name;//产品名称
     private String price;//每小时计费
-    private String remark;
+    private String remark;//备注
 
     public String getId() {
         return id;
