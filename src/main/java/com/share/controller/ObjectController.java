@@ -51,20 +51,19 @@ public class ObjectController {
             Settings settings = ImmutableSettings.settingsBuilder()
                     .put("cluster.name", "elasticsearch").build();
             TransportClient client = new TransportClient(settings);
-            client.addTransportAddress(new InetSocketTransportAddress("127.0.0.1", 9300));
+            client.addTransportAddress(new InetSocketTransportAddress("101.132.64.173", 9300));
             IndexResponse res = client.prepareIndex("share", "objects").setSource(data).get();
             if (res.isCreated()) {
                 System.out.println("创建成功!");
             }
             client.close();
-            return "success";
             //向mysql增加数据
-//            Integer num = objectService.addObject(object_1);
-//            if (num == 1) {
-//                return "add success";
-//            } else {
-//                return "add fail";
-//            }
+            Integer num = objectService.addObject(object_1);
+            if (num == 1) {
+                return "add success";
+            } else {
+                return "add fail";
+            }
         }catch (Exception e){
             logger.error("ObjectController.addObject error e[{}].",e);
             return "server error";

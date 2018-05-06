@@ -10,10 +10,13 @@ public class User {
     private String uname;
     //密码
     private String upwd;
-
+    //昵称
     private String alias;
+    //手机号
     private String umobile;
+    //申请
     private String IDnumber;
+    //钱包
     private double wallet;
     private String condition;
 
