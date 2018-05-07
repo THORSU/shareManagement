@@ -1,9 +1,11 @@
 package com.share.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by weixin on 17-8-6.
  */
-public class Manager {
+public class Manager implements Serializable {
     private String mid;
     private String mname;
     private String mpassword;

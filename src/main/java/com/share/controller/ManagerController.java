@@ -60,6 +60,7 @@ public class ManagerController {
         }
         Integer num = managerService.signUp(manager);
         Manager res1=managerService.getManager(manager);
+        logger.info(res1.toString());
         managerRedisService.addManager(res1);
         if (num == 1) {
             return "sign up success";
