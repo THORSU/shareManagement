@@ -22,7 +22,7 @@ public class ManagerRedisServiceImpl implements IManagerRedisService {
     @Override
     public void addManager(Manager manager) {
         ValueOperations<String, Manager> valueops = redisTemplate.opsForValue();
-        valueops.set(manager.getMid(), manager);
-        colls.add(manager.getMid());
+        valueops.set(manager.getMname(), manager);
+        colls.add(manager.getMname());
     }
 }
