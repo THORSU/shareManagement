@@ -1,6 +1,7 @@
 package com.share.controller;
 
 import com.share.pojo.Manager;
+import com.share.service.IManagerRedisService;
 import com.share.service.IManagerService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,8 @@ public class ManagerController {
     private static Logger logger = Logger.getLogger(ManagerController.class);
     @Autowired
     private IManagerService managerService;
-
+    @Autowired
+    private IManagerRedisService managerRedisService;//redis操作类
     //管理员登录
     private Manager manager = new Manager();
 
@@ -51,7 +53,14 @@ public class ManagerController {
         String pwd = request.getParameter("pwd").trim();
         manager.setMname(name);
         manager.setMpassword(pwd);
+        //验证是否已注册
+        Manager res = managerService.getManager(manager);
+        if (res!=null){
+            return "already exist";
+        }
         Integer num = managerService.signUp(manager);
+        Manager res1=managerService.getManager(manager);
+        managerRedisService.addManager(res1);
         if (num == 1) {
             return "sign up success";
         } else {

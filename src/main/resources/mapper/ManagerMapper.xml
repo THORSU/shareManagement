@@ -26,4 +26,10 @@
         (#{mname},#{mpassword})
     </insert>
 
+    <select id="getManager" parameterType="com.share.pojo.Manager" resultMap="ManagerInfoResult">
+        SELECT *
+        FROM
+        Manager
+        WHERE mname=#{mname}
+    </select>
 </mapper>

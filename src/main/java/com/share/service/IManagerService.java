@@ -20,4 +20,11 @@ public interface IManagerService {
      * @return
      */
     public Integer signUp(Manager manager);
+
+    /**
+     * 查看是否注册
+     * @param manager
+     * @return
+     */
+    public Manager getManager(Manager manager);
 }

@@ -23,4 +23,9 @@ public class ManagerServiceImpl implements IManagerService{
     public Integer signUp(Manager manager) {
         return managerMapper.signUp(manager);
     }
+
+    @Override
+    public Manager getManager(Manager manager) {
+        return managerMapper.getManager(manager);
+    }
 }
