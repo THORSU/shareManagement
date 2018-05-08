@@ -33,27 +33,31 @@ public class ManagerController {
     Object managerLogin(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("name").trim();
         String pwd = request.getParameter("pwd").trim();
-        //redis登录
-        Manager rest = managerRedisService.getManger(name);
-        if (rest != null) {
-            if (rest.getMpassword().equals(pwd)) {
-                logger.info("redis登录成功");
-                return "1";
-            } else {
-                return "0";
-            }
+        if (name.equals("") || pwd.equals("")) {
+            return "blank";
         } else {
-            //mysql登录
-            manager.setMname(name);
-            manager.setMpassword(pwd);
-            Manager res = managerService.login(manager);
-            managerRedisService.addManager(res);
-            if (res != null) {
-                logger.info("mysql登录成功");
-                return "1";
+            //redis登录
+            Manager rest = managerRedisService.getManger(name);
+            if (rest != null) {
+                if (rest.getMpassword().equals(pwd)) {
+                    logger.info("redis登录成功");
+                    return "1";
+                } else {
+                    return "0";
+                }
             } else {
-                logger.error("0");
-                return "0";
+                //mysql登录
+                manager.setMname(name);
+                manager.setMpassword(pwd);
+                Manager res = managerService.login(manager);
+                managerRedisService.addManager(res);
+                if (res != null) {
+                    logger.info("mysql登录成功");
+                    return "1";
+                } else {
+                    logger.error("0");
+                    return "0";
+                }
             }
         }
     }
@@ -64,25 +68,32 @@ public class ManagerController {
     Object managerSignUp(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("name").trim();
         String pwd = request.getParameter("pwd").trim();
+        String pwd1 = request.getParameter("pwd1").trim();
         manager.setMname(name);
         manager.setMpassword(pwd);
-        //验证是否已注册(mysql)
-        Manager res = managerService.getManager(manager);
-        if (res == null) {
-            //向mysql添加数据
-            Integer num = managerService.signUp(manager);
-            //从mysql获取列id
-            Manager res1 = managerService.getManager(manager);
-            logger.info(res1.toString());
-            //向redis添加数据
-            managerRedisService.addManager(res1);
-            if (num == 1) {
-                return "sign up success";
-            } else {
-                return "sign up fail";
-            }
+        if (name.equals("") || pwd.equals("")) {
+            return "blank";
+        } else if (!pwd.equals(pwd1)) {
+            return "pwd different";
         } else {
-            return "already exist";
+            //验证是否已注册(mysql)
+            Manager res = managerService.getManager(manager);
+            if (res == null) {
+                //向mysql添加数据
+                Integer num = managerService.signUp(manager);
+                //从mysql获取列id
+                Manager res1 = managerService.getManager(manager);
+                logger.info(res1.toString());
+                //向redis添加数据
+                managerRedisService.addManager(res1);
+                if (num == 1) {
+                    return "sign up success";
+                } else {
+                    return "sign up fail";
+                }
+            } else {
+                return "already exist";
+            }
         }
     }
 }

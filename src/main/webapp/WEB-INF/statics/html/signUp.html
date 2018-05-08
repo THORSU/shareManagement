@@ -18,6 +18,7 @@
 <div class="login">
     <input type="text" placeholder="手机号码/邮箱" id="name"/><br>
     <input type="password" placeholder="请输入密码" id="pwd"/><br>
+    <input type="password" placeholder="请再次输入密码" id="pwd1"/><br>
     <!--<input type="text" id="vcode" placeholder="请输入验证码" onblur="validateCode()"/><br>-->
     <input type="button" value="注册" onclick="signUp()"/><br>
 </div>
@@ -26,9 +27,10 @@
     function signUp() {
         var name = $("#name").val();
         var pwd = $("#pwd").val();
+        var pwd1 = $("#pwd1").val();
         $.ajax({
             type: "post",
-            url: "/share/signUp.from?name=" + name.trim() + "&pwd=" + pwd.trim(),
+            url: "/share/signUp.from?name=" + name.trim() + "&pwd=" + pwd.trim() + "&pwd1=" + pwd1,
             dataType: "html",
             success: function (msg) {
                 if (msg == "sign up success") {
@@ -36,6 +38,10 @@
                     alert("注册成功");
                 } else if (msg == "already exist") {
                     alert("已存在")
+                } else if (msg == "blank") {
+                    alert("不能为空")
+                } else if (msg == "pwd different") {
+                    alert("两次密码不一致")
                 }
                 else {
                     alert("注册失败");

@@ -39,8 +39,9 @@
                 if (msg == "1") {
                     window.location.href = 'ManagerPage.html';
                     alert("登录成功");
-                }
-                else {
+                } else if (msg == "blank") {
+                    alert("不能为空")
+                } else {
                     alert("登录失败");
                 }
             }
