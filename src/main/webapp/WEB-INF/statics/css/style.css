@@ -49,8 +49,9 @@ body {
     float: left;
     color: #fff;
     font-family: 'Exo', sans-serif;
-    font-size: 35px;
+    font-size: 50px;
     font-weight: 200;
+    margin-left: -180px;
 }
 
 .header div span {

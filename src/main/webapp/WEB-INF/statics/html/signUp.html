@@ -24,6 +24,11 @@
 </div>
 </body>
 <script type="text/javascript">
+    //前台验证密码
+    $("#pwd").focus(function () {
+        $("#passwordTip").text("*密码由不少于6位或大于16位数字和字母组成");
+        $("#passwordTip").css("color", "red");
+    })
     function signUp() {
         var name = $("#name").val();
         var pwd = $("#pwd").val();
