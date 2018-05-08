@@ -50,7 +50,7 @@ CREATE TABLE Objects
 )
   ENGINE = InnoDB
   CHARSET = utf8;
-
+#订单表
 DROP TABLE IF EXISTS Orders;
 CREATE TABLE Orders
 (
