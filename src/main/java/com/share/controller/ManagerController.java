@@ -68,20 +68,21 @@ public class ManagerController {
         manager.setMpassword(pwd);
         //验证是否已注册(mysql)
         Manager res = managerService.getManager(manager);
-        if (res!=null){
-            return "already exist";
-        }
-        //向mysql添加数据
-        Integer num = managerService.signUp(manager);
-        //从mysql获取列id
-        Manager res1=managerService.getManager(manager);
-        logger.info(res1.toString());
-        //向redis添加数据
-        managerRedisService.addManager(res1);
-        if (num == 1) {
-            return "sign up success";
+        if (res == null) {
+            //向mysql添加数据
+            Integer num = managerService.signUp(manager);
+            //从mysql获取列id
+            Manager res1 = managerService.getManager(manager);
+            logger.info(res1.toString());
+            //向redis添加数据
+            managerRedisService.addManager(res1);
+            if (num == 1) {
+                return "sign up success";
+            } else {
+                return "sign up fail";
+            }
         } else {
-            return "sign up fail";
+            return "already exist";
         }
     }
 }
