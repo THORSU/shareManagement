@@ -12,4 +12,12 @@ public interface IManagerRedisService {
      * @param manager
      */
     void addManager(Manager manager);
+
+    /**
+     * 获取redis的信息
+     *
+     * @param username
+     * @return
+     */
+    Manager getManger(String username);
 }

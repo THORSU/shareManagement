@@ -24,24 +24,36 @@ public class ManagerController {
     @Autowired
     private IManagerService managerService;
     @Autowired
-    private IManagerRedisService managerRedisService;//redis操作类
-    //管理员登录
+    private IManagerRedisService managerRedisService;
     private Manager manager = new Manager();
 
+    //管理员登录
     @RequestMapping(value = "/login.from", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody
     Object managerLogin(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("name").trim();
         String pwd = request.getParameter("pwd").trim();
-        manager.setMname(name);
-        manager.setMpassword(pwd);
-        Manager res = managerService.login(manager);
-        if (res != null) {
-            logger.info(res);
-            return "1";
+        //redis登录
+        Manager rest = managerRedisService.getManger(name);
+        if (rest != null) {
+            if (rest.getMpassword().equals(pwd)) {
+                logger.info("redis登录成功");
+                return "1";
+            } else {
+                return "0";
+            }
         } else {
-            logger.error("0");
-            return "0";
+            //mysql登录
+            manager.setMname(name);
+            manager.setMpassword(pwd);
+            Manager res = managerService.login(manager);
+            if (res != null) {
+                logger.info("mysql登录成功");
+                return "1";
+            } else {
+                logger.error("0");
+                return "0";
+            }
         }
     }
 

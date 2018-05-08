@@ -25,4 +25,11 @@ public class ManagerRedisServiceImpl implements IManagerRedisService {
         valueops.set(manager.getMname(), manager);
         colls.add(manager.getMname());
     }
+
+    @Override
+    public Manager getManger(String username) {
+        ValueOperations<String, Manager> valueOperations = redisTemplate.opsForValue();
+        Manager manager = valueOperations.get(username);
+        return manager;
+    }
 }
