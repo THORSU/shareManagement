@@ -47,6 +47,7 @@ public class ManagerController {
             manager.setMname(name);
             manager.setMpassword(pwd);
             Manager res = managerService.login(manager);
+            managerRedisService.addManager(res);
             if (res != null) {
                 logger.info("mysql登录成功");
                 return "1";
