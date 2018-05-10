@@ -11,4 +11,7 @@
         VALUES
         (#{code},#{name},#{price},#{remark})
     </insert>
+    <select id="getObject" parameterType="String" resultType="com.share.pojo.Object_1">
+        SELECT * FROM Objects WHERE code=#{code}
+    </select>
 </mapper>

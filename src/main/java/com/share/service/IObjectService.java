@@ -13,4 +13,11 @@ public interface IObjectService {
      * @return
      */
     public Integer addObject(Object_1 object_1);
+
+    /**
+     * 查找商品
+     * @param code
+     * @return
+     */
+    public Object_1 getObject(String code);
 }

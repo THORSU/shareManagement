@@ -19,4 +19,9 @@ public class ObjectServiceImpl implements IObjectService{
     public Integer addObject(Object_1 object_1) {
         return objectMapper.addObject(object_1);
     }
+
+    @Override
+    public Object_1 getObject(String code) {
+        return objectMapper.getObject(code);
+    }
 }

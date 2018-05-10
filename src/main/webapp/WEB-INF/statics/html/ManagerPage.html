@@ -6,7 +6,6 @@
     <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
-产品编码：<input type="text" id="code"/><br>
 产品名称：<input type="text" id="name"/><br>
 每小时计费: <input type="text" id="price"/><br>
 商品备注：<input type="text" id="remark"/><br>
@@ -14,17 +13,16 @@
 </body>
 <script type="text/javascript">
     function addObject() {
-        var code=$("#code").val();
+        // var code=$("#code").val();
         var name=$("#name").val();
         var price = $("#price").val();
         var remark = $("#remark").val();
-        console.log(code);
         console.log(name);
         console.log(price);
         console.log(remark);
         $.ajax({
             type:"post",
-            url: "/object/addObject.from?code=" + code + "&name=" + name + "&price=" + price + "&remark=" + remark,
+            url: "/object/addObject.from?name=" + name + "&price=" + price + "&remark=" + remark,
             dataType:"html",
             success:function (msg) {
                 if (msg == "add success") {

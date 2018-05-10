@@ -1,7 +1,7 @@
 package com.share.controller;
 
 import com.share.pojo.Manager;
-import com.share.service.IManagerRedisService;
+import com.share.service.IRedisService;
 import com.share.service.IManagerService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class ManagerController {
     @Autowired
     private IManagerService managerService;
     @Autowired
-    private IManagerRedisService managerRedisService;
+    private IRedisService managerRedisService;
     private Manager manager = new Manager();
 
     //管理员登录

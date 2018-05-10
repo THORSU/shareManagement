@@ -1,9 +1,11 @@
 package com.share.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by weixin on 17-8-6.
  */
-public class Object_1 {
+public class Object_1 implements Serializable {
     //todo 此处设置了商品的id自增
     private String id;//产品id
     private String code;//产品编码

@@ -1,12 +1,13 @@
 package com.share.service;
 
 import com.share.pojo.Manager;
+import com.share.pojo.Object_1;
 
 /**
  * @Author: QuincySu
  * @Date: 2018/5/7
  */
-public interface IManagerRedisService {
+public interface IRedisService {
     /**
      * 增加管理员
      * @param manager
@@ -20,4 +21,6 @@ public interface IManagerRedisService {
      * @return
      */
     Manager getManger(String username);
+
+    void addObject(Object_1 object_1);
 }
