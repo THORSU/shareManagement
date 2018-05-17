@@ -9,9 +9,27 @@ public class Object_1 implements Serializable {
     //todo 此处设置了商品的id自增
     private String id;//产品id
     private String code;//产品编码
+    private String merchantName;//商家名
     private String name;//产品名称
     private String price;//每小时计费
+    private String goodsState;//状态位
     private String remark;//备注
+
+    public String getGoodsState() {
+        return goodsState;
+    }
+
+    public void setGoodsState(String goodsState) {
+        this.goodsState = goodsState;
+    }
+
+    public String getMerchantName() {
+        return merchantName;
+    }
+
+    public void setMerchantName(String merchantName) {
+        this.merchantName = merchantName;
+    }
 
     public String getId() {
         return id;
