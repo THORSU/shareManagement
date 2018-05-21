@@ -77,3 +77,28 @@ CREATE TABLE bikeTable
 )
   ENGINE = InnoDB
   CHARSET = utf8;
+
+# 管理员表
+DROP TABLE IF EXISTS Manager;
+CREATE TABLE Manager
+(
+  mid       INT AUTO_INCREMENT
+    PRIMARY KEY,
+  mname     VARCHAR(20) NOT NULL,
+  mpassword VARCHAR(20) NULL
+)
+  COMMENT '管理员'
+  CHARSET = utf8
+  ENGINE = InnoDB;
+
+# 商家表
+DROP TABLE IF EXISTS Merchant;
+CREATE TABLE Merchant
+(
+  id                INT AUTO_INCREMENT PRIMARY KEY,
+  merchant_name     VARCHAR(20) NOT NULL,
+  merchant_password VARCHAR(20) NOT NULL
+)
+  COMMENT '商家表'
+  ENGINE = InnoDB
+  CHARSET = utf8;

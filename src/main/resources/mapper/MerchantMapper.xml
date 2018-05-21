@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.mapper.MerchantMapper">
+    <!--商家登录-->
+    <select id="merchantLogin" parameterType="com.share.pojo.Merchant" resultType="com.share.pojo.Merchant">
+        SELECT * FROM Merchant WHERE merchant_name=#{merchantName}
+    </select>
+
+</mapper>
