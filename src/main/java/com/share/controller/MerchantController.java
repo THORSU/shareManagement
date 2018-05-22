@@ -2,6 +2,7 @@ package com.share.controller;
 
 import com.share.pojo.Merchant;
 import com.share.service.IMerchantService;
+import com.share.service.IRedisService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,8 @@ public class MerchantController {
 
     @Autowired
     private IMerchantService merchantService;
+    @Autowired
+    private IRedisService managerRedisService;
 
     private Merchant merchant = new Merchant();
 
@@ -40,15 +43,28 @@ public class MerchantController {
         }
         merchant.setMerchantName(merchantName);
         merchant.setMerchantPassword(merchantPassword);
-        Merchant res = merchantService.merchantLogin(merchant);
-        if (res != null) {
-            if (merchantPassword.equals(res.getMerchantPassword())) {
+        //获取redis
+        Merchant rest = managerRedisService.getMerchant(merchantName);
+        if (rest != null) {
+            if (rest.getMerchantPassword().equals(merchantPassword)) {
+                logger.info("redis登录成功");
                 return "merchant login success";
             } else {
                 return "merchant password error";
             }
         } else {
-            return "merchant not exist";
+            //sql登录
+            Merchant res = merchantService.merchantLogin(merchant);
+            if (res != null) {
+                if (merchantPassword.equals(res.getMerchantPassword())) {
+                    logger.info("mysql登录成功");
+                    return "merchant login success";
+                } else {
+                    return "merchant password error";
+                }
+            } else {
+                return "merchant not exist";
+            }
         }
     }
 
@@ -71,6 +87,11 @@ public class MerchantController {
             Merchant res = merchantService.merchantLogin(merchant);
             if (res == null) {
                 int num = merchantService.merchantSignUp(merchant);
+                logger.info("mysql添加成功");
+                Merchant rest = merchantService.merchantLogin(merchant);
+                //redis添加
+                managerRedisService.addMerchant(rest);
+                logger.info("redis添加成功");
                 if (num == 1) {
                     return "merchant sign up success";
                 } else {
