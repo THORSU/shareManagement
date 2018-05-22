@@ -7,9 +7,9 @@
 
     <insert id="addObject" parameterType="com.share.pojo.Object_1">
         INSERT INTO Objects
-        (Object_code, name, price, remark)
+        (object_code,merchant_name,object_name,object_price,object_status,object_remark)
         VALUES
-        (#{code},#{name},#{price},#{remark})
+        (#{objectCode},#{merchantName},#{objectName},#{objectPrice},#{objectStatus},#{objectRemark})
     </insert>
     <select id="getObject" parameterType="String" resultType="com.share.pojo.Object_1">
         SELECT * FROM Objects WHERE Object_code=#{code}

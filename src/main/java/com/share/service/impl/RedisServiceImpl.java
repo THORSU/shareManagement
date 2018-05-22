@@ -57,6 +57,6 @@ public class RedisServiceImpl implements IRedisService {
     @Override
     public void addObject(Object_1 object_1) {
         HashOperations<String, String, String> hashOperations = redisTemplate.opsForHash();
-        hashOperations.put("shareObject", "shareObject" + object_1.getCode(), JSON.toJSONString(object_1));
+        hashOperations.put("shareObject", "shareObject" + object_1.getObjectCode(), JSON.toJSONString(object_1));
     }
 }

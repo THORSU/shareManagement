@@ -39,25 +39,29 @@ CREATE TABLE Orders
 )
   ENGINE = InnoDB
   CHARSET = utf8;
-
+# 商品表
 DROP TABLE IF EXISTS Objects;
 CREATE TABLE Objects
 (
-  id          INT(20) AUTO_INCREMENT
-  COMMENT '主键id'
-    PRIMARY KEY,
-  Object_code VARCHAR(20)  NULL
+  id            INT(20) AUTO_INCREMENT PRIMARY KEY
+  COMMENT '主键id',
+  object_code   VARCHAR(20)  NOT NULL
   COMMENT '商品序列号',
-  name        VARCHAR(50)  NULL
+  merchant_name VARCHAR(20)  NOT NULL
+  COMMENT '商品名',
+  object_name   VARCHAR(50)  NOT NULL
   COMMENT '商品名称',
-  price       DOUBLE(5, 2) NULL
+  object_price  DOUBLE(5, 2) NOT NULL
   COMMENT '商品租用价格',
-  remark      VARCHAR(200) NULL
+  object_status VARCHAR(20)  NOT NULL
+  COMMENT '商品的上架状态',
+  object_remark VARCHAR(200) NULL
   COMMENT '商品备注'
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 1000
   CHARSET = utf8;
+
 DROP TABLE IF EXISTS bikeTable;
 CREATE TABLE bikeTable
 (

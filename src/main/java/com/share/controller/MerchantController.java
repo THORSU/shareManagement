@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
@@ -48,6 +49,11 @@ public class MerchantController {
         if (rest != null) {
             if (rest.getMerchantPassword().equals(merchantPassword)) {
                 logger.info("redis登录成功");
+                //向浏览器添加cookie
+                Cookie name = new Cookie("merchantName", rest.getMerchantName());
+                name.setPath("/");
+                name.setMaxAge(60 * 60 * 24);
+                response.addCookie(name);
                 return "merchant login success";
             } else {
                 return "merchant password error";
@@ -58,6 +64,11 @@ public class MerchantController {
             if (res != null) {
                 if (merchantPassword.equals(res.getMerchantPassword())) {
                     logger.info("mysql登录成功");
+                    //向浏览器添加cookie
+                    Cookie name = new Cookie("merchantName", rest.getMerchantName());
+                    name.setPath("/");
+                    name.setMaxAge(60 * 60 * 24);
+                    response.addCookie(name);
                     return "merchant login success";
                 } else {
                     return "merchant password error";

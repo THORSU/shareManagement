@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.share.pojo.Object_1;
 import com.share.service.IObjectService;
 import com.share.service.IRedisService;
-import com.share.util.StringRandom;
 import org.apache.log4j.Logger;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
@@ -39,21 +39,35 @@ public class ObjectController {
     public @ResponseBody
     Object addObject(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         try {
-//            String code = request.getParameter("code").toString();
+            //商品名
             String name = new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
+            //商品价格
             String price = request.getParameter("price").toString();
-//        String remark = request.getParameter("remark").toString();
             //todo 避免获得的值为乱码
+            //商品备注
             String remark = new String(request.getParameter("remark").getBytes("iso-8859-1"), "utf-8");
-//            String code = StringRandom.getRandNum(10);
-            String code=Long.toString(System.currentTimeMillis());
-            object_1.setCode(code);
-            object_1.setName(name);
-            object_1.setPrice(price);
-            object_1.setRemark(remark);
+            //商品编码
+            String code = Long.toString(System.currentTimeMillis());
+            //从cookie获得merchantName
+            final Cookie[] cookies = request.getCookies();
+            String merchantName = "";
+            if (cookies != null) {
+                for (final Cookie cookie : cookies) {
+                    if ("merchantName".equals(cookie.getName())) {
+                        merchantName = cookie.getValue();
+                    }
+                }
+            }
+            //商品状态默认是 0未上架
+            object_1.setObjectStatus("0");
+            object_1.setMerchantName(merchantName);
+            object_1.setObjectCode(code);
+            object_1.setObjectName(name);
+            object_1.setObjectPrice(price);
+            object_1.setObjectRemark(remark);
             //向mysql增加数据
             Integer num = objectService.addObject(object_1);
-            Object_1 res1= objectService.getObject(code);
+            Object_1 res1 = objectService.getObject(code);
             //向redis增加数据
             redisService.addObject(res1);
             //向es增加数据
