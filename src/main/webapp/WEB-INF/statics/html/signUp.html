@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>注册</title>
+    <title>商家注册</title>
     <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
     <link rel="stylesheet" href="../css/style.css">
@@ -35,20 +35,19 @@
         var pwd1 = $("#pwd1").val();
         $.ajax({
             type: "post",
-            url: "/share/signUp.from?name=" + name.trim() + "&pwd=" + pwd.trim() + "&pwd1=" + pwd1,
+            url: "/share/MerchantSignUp.from?merchantName=" + name.trim() + "&merchantPassword=" + pwd.trim() + "&merchantPassword1=" + pwd1,
             dataType: "html",
             success: function (msg) {
-                if (msg == "sign up success") {
+                if (msg == "merchant sign up success") {
                     window.location.href = 'index.html';
                     alert("注册成功");
-                } else if (msg == "already exist") {
+                } else if (msg == "merchant already exist") {
                     alert("已存在")
                 } else if (msg == "blank") {
                     alert("不能为空")
                 } else if (msg == "pwd different") {
                     alert("两次密码不一致")
-                }
-                else {
+                } else {
                     alert("注册失败");
                 }
             }

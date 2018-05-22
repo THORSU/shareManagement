@@ -14,4 +14,12 @@ public interface MerchantMapper {
      * @return
      */
     public Merchant merchantLogin(Merchant merchant);
+
+    /**
+     * 商家注册
+     *
+     * @param merchant
+     * @return
+     */
+    public int merchantSignUp(Merchant merchant);
 }

@@ -7,5 +7,11 @@
     <select id="merchantLogin" parameterType="com.share.pojo.Merchant" resultType="com.share.pojo.Merchant">
         SELECT * FROM Merchant WHERE merchant_name=#{merchantName}
     </select>
-
+    <!--商家注册-->
+    <insert id="merchantSignUp" parameterType="com.share.pojo.Merchant">
+        INSERT INTO Merchant
+         (merchant_name,merchant_password)
+         VALUES
+         (#{merchantName},#{merchantPassword})
+    </insert>
 </mapper>
