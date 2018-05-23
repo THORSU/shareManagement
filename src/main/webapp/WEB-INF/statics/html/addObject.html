@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员页面</title>
+    <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="../css/addObject.css">
+</head>
+
+<body>
+<div>
+    <form>
+        <div id="addObject">
+            <div data-role="header">
+                <div class="title">增加商品</div>
+            </div>
+            <br>
+            <div class="content">
+                <div>
+                    <label for="name"></label>
+                    <input type="text" class="input" maxlength="16" autocomplete="off" placeholder="请输入商品名"
+                           id="name">
+                </div>
+                <br>
+                <div>
+                    <label for="price"></label>
+                    <input type="text" class="input" maxlength="16" autocomplete="off" placeholder="请输入商品价格"
+                           id="price">
+                </div>
+                <br>
+                <div>
+                    <label for="remark"></label>
+                    <input type="text" class="input" maxlength="16" autocomplete="off" placeholder="请输入商品备注"
+                           id="remark">
+                </div>
+                <br>
+                <div>
+                    <input type="button" class="addObjectButton" value="添加商品" data-inline="true" onclick="addObject()">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+
+<script type="text/javascript">
+    function addObject() {
+        // var code=$("#code").val();
+        var name = $("#name").val();
+        var price = $("#price").val();
+        var remark = $("#remark").val();
+        console.log(name);
+        console.log(price);
+        console.log(remark);
+        $.ajax({
+            type: "post",
+            url: "/object/addObject.from?name=" + name + "&price=" + price + "&remark=" + remark,
+            dataType: "html",
+            success: function (msg) {
+                if (msg == "add success") {
+                    alert("添加成功");
+                } else {
+                    alert("添加失败");
+                }
+            }
+        })
+    }
+</script>
+</html>
