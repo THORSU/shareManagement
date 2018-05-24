@@ -62,8 +62,8 @@ CREATE TABLE Objects
   AUTO_INCREMENT = 1000
   CHARSET = utf8;
 
-DROP TABLE IF EXISTS bikeTable;
-CREATE TABLE bikeTable
+DROP TABLE IF EXISTS objectTable;
+CREATE TABLE objectTable
 (
   id          INT(20)      NOT NULL
   COMMENT '主键id'
