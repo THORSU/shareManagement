@@ -1,8 +1,8 @@
 package com.share.controller;
 
 import com.share.pojo.Manager;
-import com.share.service.IRedisService;
 import com.share.service.IManagerService;
+import com.share.service.IRedisService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +27,14 @@ public class ManagerController {
     private IRedisService managerRedisService;
     private Manager manager = new Manager();
 
-    //管理员登录
+    /**
+     * 管理员登录
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+
     @RequestMapping(value = "/login.from", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody
     Object managerLogin(HttpServletRequest request, HttpServletResponse response) {
@@ -62,7 +69,14 @@ public class ManagerController {
         }
     }
 
-    //管理员注册
+    /**
+     * 管理员注册
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+
     @RequestMapping(value = "/signUp.from", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody
     Object managerSignUp(HttpServletRequest request, HttpServletResponse response) {

@@ -35,7 +35,14 @@ public class ObjectController {
     private IRedisService redisService;
     private Object_1 object_1 = new Object_1();
 
-    //添加商品
+    /**
+     * 添加商品
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws UnsupportedEncodingException
+     */
     @RequestMapping(value = "/addObject.from", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody
     Object addObject(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {

@@ -31,7 +31,14 @@ public class MerchantController {
 
     private Merchant merchant = new Merchant();
 
-    //商家登录
+    /**
+     * 商家登录
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws UnsupportedEncodingException
+     */
     @RequestMapping(value = "/MerchantLogin.from", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody
     Object MerchantLogin(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
@@ -79,7 +86,14 @@ public class MerchantController {
         }
     }
 
-    //商家注册
+    /**
+     * 商家注册
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws UnsupportedEncodingException
+     */
     @RequestMapping(value = "/MerchantSignUp.from", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody
     Object MerchantSignUp(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
