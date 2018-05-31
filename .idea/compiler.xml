@@ -9,8 +9,8 @@
         <module name="shareManagement" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="shareManagement" target="1.7" />
+    <bytecodeTargetLevel target="8">
+      <module name="shareManagement" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

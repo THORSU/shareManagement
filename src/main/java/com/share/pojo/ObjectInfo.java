@@ -1,35 +1,37 @@
 package com.share.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by weixin on 18-4-21.
  */
-public class ObjectInfo {
+public class ObjectInfo implements Serializable {
 
-    private Long id;//主键id
+    private String id;//主键id
 
-    private Long objectId;//'商品主表对应id'
+    private String objectId;//商品主表对应id
 
-    private String code;//'子商品序列号'
+    private String code;//子商品序列号
 
-    private String password;//'子商品密码'
+    private String password;//子商品密码
 
-    private String condition;//'是否可用（好坏）'
+    private String condition;//是否可用（0好1坏）
 
-    private String remark;//'商品备注'
+    private String remark;//商品备注
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getObjectId() {
+    public String getObjectId() {
         return objectId;
     }
 
-    public void setObjectId(Long objectId) {
+    public void setObjectId(String objectId) {
         this.objectId = objectId;
     }
 

@@ -14,4 +14,15 @@
     <select id="getObject" parameterType="String" resultType="com.share.pojo.Object_1">
         SELECT * FROM Objects WHERE Object_code=#{code}
     </select>
+    <select id="getObjectFromName" parameterType="String" resultType="com.share.pojo.Object_1">
+        SELECT * FROM Objects WHERE object_name=#{objectName}
+    </select>
+    <!--批量插入-->
+    <insert id="insertSubObject" parameterType="java.util.List">
+        INSERT INTO objectTable (objectId, sub_code, password, condition, remark)
+        values
+        <foreach collection="objectInfos" item="objects" separator=",">
+            (#{objects.objectId},#{objects.code},#{objects.password},#{objects.condition},#{objects.remark})
+        </foreach>
+    </insert>
 </mapper>

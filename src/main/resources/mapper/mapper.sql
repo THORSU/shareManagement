@@ -65,7 +65,7 @@ CREATE TABLE Objects
 DROP TABLE IF EXISTS objectTable;
 CREATE TABLE objectTable
 (
-  id          INT(20)      NOT NULL
+  id          INT(20)      NOT NULL auto_increment
   COMMENT '主键id'
     PRIMARY KEY,
   objectId    INT(20)      NULL
@@ -80,6 +80,7 @@ CREATE TABLE objectTable
   COMMENT '商品备注'
 )
   ENGINE = InnoDB
+  auto_increment = 1000
   CHARSET = utf8;
 
 # 管理员表

@@ -1,9 +1,11 @@
 package com.share.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.share.pojo.ObjectInfo;
 import com.share.pojo.Object_1;
 import com.share.service.IObjectService;
 import com.share.service.IRedisService;
+import com.share.util.StringRandom;
 import org.apache.log4j.Logger;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
@@ -20,6 +22,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * @Author: QuincySu
@@ -34,6 +39,7 @@ public class ObjectController {
     @Autowired
     private IRedisService redisService;
     private Object_1 object_1 = new Object_1();
+//    private ObjectInfo objectInfo = new ObjectInfo();
 
     /**
      * 添加商品
@@ -67,11 +73,17 @@ public class ObjectController {
                 }
             }
             //商品状态默认是 0未上架
+            //上架状态
             object_1.setObjectStatus("0");
+            //商家名
             object_1.setMerchantName(merchantName);
+            //商品编码
             object_1.setObjectCode(code);
+            //商品名
             object_1.setObjectName(name);
+            //商品价格
             object_1.setObjectPrice(price);
+            //商品备注
             object_1.setObjectRemark(remark);
             //向mysql增加数据
             Integer num = objectService.addObject(object_1);
@@ -100,4 +112,42 @@ public class ObjectController {
         }
     }
 
+    /**
+     * 批量添加子商品
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws UnsupportedEncodingException
+     */
+    @RequestMapping(value = "/addSubObject.from", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    public @ResponseBody
+    Object addSubObject(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+        //商品名
+        String objectName = new String(request.getParameter("objectName").getBytes("iso-8859-1"), "utf-8");
+        //子商品编码
+        String subObjectCode = Long.toString(System.nanoTime());
+        //子商品密码
+        String subPassword = StringRandom.getRandNum(6);
+        Object_1 res = objectService.getObjectFromName(objectName);
+        if (res.getObjectName() == null) {
+            return "object error";
+        }
+        List<ObjectInfo> objectInfoList = new ArrayList<ObjectInfo>(new HashSet<ObjectInfo>());
+        for (int i = 0; i < 10; i++) {
+            ObjectInfo objectInfo = new ObjectInfo();
+            objectInfo.setObjectId(res.getId());
+            objectInfo.setPassword(subPassword);
+            objectInfo.setCode(subObjectCode);
+            objectInfo.setCondition("0");
+            objectInfo.setRemark("");
+            objectInfoList.add(objectInfo);
+        }
+        int num = objectService.insertSubObject(objectInfoList);
+        if (num == 1) {
+            return "insert success";
+        } else {
+            return "insert fail";
+        }
+    }
 }

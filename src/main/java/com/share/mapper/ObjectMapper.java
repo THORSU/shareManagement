@@ -1,6 +1,9 @@
 package com.share.mapper;
 
+import com.share.pojo.ObjectInfo;
 import com.share.pojo.Object_1;
+
+import java.util.List;
 
 /**
  * @Author: QuincySu
@@ -19,4 +22,20 @@ public interface ObjectMapper {
      * @return
      */
     public Object_1 getObject(String code);
+
+    /**
+     * 用商品名查找商品
+     *
+     * @param objectName
+     * @return
+     */
+    public Object_1 getObjectFromName(String objectName);
+
+    /**
+     * 批量插入子商品
+     *
+     * @param objectInfos
+     * @return
+     */
+    public int insertSubObject(List<ObjectInfo> objectInfos);
 }
