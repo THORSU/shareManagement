@@ -19,7 +19,7 @@
     </select>
     <!--批量插入-->
     <insert id="insertSubObject" parameterType="java.util.List">
-        INSERT INTO objectTable (objectId, sub_code, password, condition, remark)
+        INSERT INTO objectTable (`objectId`,`sub_code`,`password`,`condition`,`remark`)
         values
         <foreach collection="objectInfos" item="objects" separator=",">
             (#{objects.objectId},#{objects.code},#{objects.password},#{objects.condition},#{objects.remark})

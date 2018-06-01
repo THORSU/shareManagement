@@ -2,6 +2,7 @@ package com.share.mapper;
 
 import com.share.pojo.ObjectInfo;
 import com.share.pojo.Object_1;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -37,5 +38,5 @@ public interface ObjectMapper {
      * @param objectInfos
      * @return
      */
-    public int insertSubObject(List<ObjectInfo> objectInfos);
+    public int insertSubObject(@Param("objectInfos") List<ObjectInfo> objectInfos);
 }

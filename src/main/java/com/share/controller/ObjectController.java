@@ -25,6 +25,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @Author: QuincySu
@@ -125,16 +126,16 @@ public class ObjectController {
     Object addSubObject(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         //商品名
         String objectName = new String(request.getParameter("objectName").getBytes("iso-8859-1"), "utf-8");
-        //子商品编码
-        String subObjectCode = Long.toString(System.nanoTime());
-        //子商品密码
-        String subPassword = StringRandom.getRandNum(6);
         Object_1 res = objectService.getObjectFromName(objectName);
-        if (res.getObjectName() == null) {
+        if (Objects.isNull(res)) {
             return "object error";
         }
         List<ObjectInfo> objectInfoList = new ArrayList<ObjectInfo>(new HashSet<ObjectInfo>());
         for (int i = 0; i < 10; i++) {
+            //子商品编码
+            String subObjectCode = Long.toString(System.nanoTime());
+            //子商品密码
+            String subPassword = StringRandom.getRandNum(6);
             ObjectInfo objectInfo = new ObjectInfo();
             objectInfo.setObjectId(res.getId());
             objectInfo.setPassword(subPassword);
@@ -143,10 +144,11 @@ public class ObjectController {
             objectInfo.setRemark("");
             objectInfoList.add(objectInfo);
         }
-        int num = objectService.insertSubObject(objectInfoList);
-        if (num == 1) {
+        try {
+            objectService.insertSubObject(objectInfoList);
             return "insert success";
-        } else {
+        } catch (Exception e) {
+            logger.error(e);
             return "insert fail";
         }
     }

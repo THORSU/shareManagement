@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加子商品</title>
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="../css/addSubObject.css">
+</head>
+<body>
+<div>
+    <form>
+        <div id="addSubObject">
+            <div data-role="header">
+                <div class="title">增加子商品</div>
+            </div>
+            <br>
+            <div class="content">
+                <div>
+                    <label for="objectName"></label>
+                    <input type="text" class="input" maxlength="16" autocomplete="off" placeholder="请输入商品名"
+                           id="objectName">
+                </div>
+                <br>
+                <div>
+                    <input type="button" class="addSubObjectButton" value="添加子商品" data-inline="true"
+                           onclick="addSubObject()">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function addSubObject() {
+        var objectName = $("#objectName").val();
+        console.log(objectName)
+        $.ajax({
+            type: "post",
+            url: "/object/addSubObject.from?objectName=" + objectName.trim(),
+            dataType: "html",
+            success: function (msg) {
+                if (msg == "insert success") {
+                    alert("插入成功")
+                } else if (msg == "object error") {
+                    alert("无此商品")
+                } else {
+                    alert("插入失败")
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>
