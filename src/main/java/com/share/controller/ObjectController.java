@@ -179,4 +179,52 @@ public class ObjectController {
         logger.info(res);
         return res;
     }
+
+    /**
+     * 删除商品
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws UnsupportedEncodingException
+     */
+    @RequestMapping(value = "/delObject.from", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    public @ResponseBody
+    Object delObject(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+        //商品名
+        String name = new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
+
+        Object_1 res = objectService.getObjectFromName(name);
+        if (Objects.isNull(res)) {
+            return "name error";
+        }
+        int num = objectService.updateObject(name);
+        if (num == 1) {
+            return "del success";
+        } else {
+            return "del fail";
+        }
+    }
+
+    @RequestMapping(value = "/updateObject.from", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    public @ResponseBody
+    Object updateObject(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+        //商品名
+        String name = new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
+        //价格
+        String price = new String(request.getParameter("price").getBytes("iso-8859-1"), "utf-8");
+
+        object_1.setObjectName(name);
+        object_1.setObjectPrice(price);
+        Object_1 rest = objectService.getObjectFromName(name);
+        if (Objects.isNull(rest)) {
+            return "name error";
+        }
+        int res = objectService.updateObjectPrice(object_1);
+        if (res == 1) {
+            return "update success";
+        } else {
+            return "update fail";
+        }
+    }
 }

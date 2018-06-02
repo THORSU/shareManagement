@@ -46,4 +46,20 @@ public interface ObjectMapper {
      * @return
      */
     public List<Object_1> getObjectList(String merchantName);
+
+    /**
+     * 修改商品
+     *
+     * @param objectName
+     * @return
+     */
+    public int updateObject(String objectName);
+
+    /**
+     * 修改商品价格
+     *
+     * @param object_1
+     * @return
+     */
+    public int updateObjectPrice(Object_1 object_1);
 }

@@ -42,4 +42,14 @@ public class ObjectServiceImpl implements IObjectService{
     public List<Object_1> getObjectList(String merchantName) {
         return objectMapper.getObjectList(merchantName);
     }
+
+    @Override
+    public int updateObject(String objectName) {
+        return objectMapper.updateObject(objectName);
+    }
+
+    @Override
+    public int updateObjectPrice(Object_1 object_1) {
+        return objectMapper.updateObjectPrice(object_1);
+    }
 }

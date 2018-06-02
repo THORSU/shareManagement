@@ -25,7 +25,17 @@
             (#{objects.objectId},#{objects.code},#{objects.password},#{objects.condition},#{objects.remark})
         </foreach>
     </insert>
+    <!--获取商品列表-->
     <select id="getObjectList" parameterType="String" resultType="com.share.pojo.Object_1">
         select * from Objects where merchant_name=#{merchantName} and object_status = 1
     </select>
+    <!--更新商品-->
+    <update id="updateObject" parameterType="String">
+        update Objects set object_status = 0
+        where object_name=#{objectName}
+    </update>
+    <update id="updateObjectPrice" parameterType="com.share.pojo.Object_1">
+        update Objects set object_price = #{objectPrice}
+        where object_name=#{objectName}
+    </update>
 </mapper>

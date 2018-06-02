@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改商品</title>
+    <link rel="stylesheet" href="../css/updateObject.css">
+    <script src="../js/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<div>
+    <form>
+        <div id="updateObject">
+            <div data-role="header">
+                <div class="title">修改商品</div>
+            </div>
+            <br>
+            <div class="content">
+                <div>
+                    <label for="name"></label>
+                    <input type="text" class="input" maxlength="16" autocomplete="off" placeholder="请输入商品名"
+                           id="name">
+                </div>
+                <br>
+                <div>
+                    <label for="price"></label>
+                    <input type="text" class="input" maxlength="16" autocomplete="off" placeholder="请输入新价格"
+                           id="price">
+                </div>
+                <br>
+                <div>
+                    <input type="button" class="updateObjectButton" value="修改商品" data-inline="true"
+                           onclick="updateObject()">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function updateObject() {
+        // var code=$("#code").val();
+        var name = $("#name").val();
+        var price = $("#price").val();
+        console.log(name);
+        $.ajax({
+            type: "post",
+            url: "/object/updateObject.from?name=" + name.trim() + "&price=" + price.trim(),
+            dataType: "html",
+            success: function (msg) {
+                if (msg == "update success") {
+                    alert("修改成功");
+                } else if (msg == "name error") {
+                    alert("无此商品");
+                } else {
+                    alert("修改成功");
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

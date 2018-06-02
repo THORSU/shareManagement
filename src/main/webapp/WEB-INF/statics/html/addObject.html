@@ -41,8 +41,6 @@
         </div>
     </form>
 </div>
-</body>
-
 <script type="text/javascript">
     function addObject() {
         // var code=$("#code").val();
@@ -54,7 +52,7 @@
         console.log(remark);
         $.ajax({
             type: "post",
-            url: "/object/addObject.from?name=" + name + "&price=" + price + "&remark=" + remark,
+            url: "/object/addObject.from?name=" + name.trim() + "&price=" + price.trim() + "&remark=" + remark.trim(),
             dataType: "html",
             success: function (msg) {
                 if (msg == "add success") {
@@ -66,4 +64,5 @@
         })
     }
 </script>
+</body>
 </html>
