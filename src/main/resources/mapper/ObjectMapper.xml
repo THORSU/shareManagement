@@ -25,4 +25,7 @@
             (#{objects.objectId},#{objects.code},#{objects.password},#{objects.condition},#{objects.remark})
         </foreach>
     </insert>
+    <select id="getObjectList" parameterType="String" resultType="com.share.pojo.Object_1">
+        select * from Objects where merchant_name=#{merchantName} and object_status = 1
+    </select>
 </mapper>

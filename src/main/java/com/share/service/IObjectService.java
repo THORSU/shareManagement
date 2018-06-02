@@ -39,4 +39,11 @@ public interface IObjectService {
      * @return
      */
     public int insertSubObject(List<ObjectInfo> objectInfos);
+
+    /**
+     * 获取商品列表
+     *
+     * @return
+     */
+    public List<Object_1> getObjectList(String merchantName);
 }

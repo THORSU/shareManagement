@@ -152,4 +152,31 @@ public class ObjectController {
             return "insert fail";
         }
     }
+
+    /**
+     * 获取商品列表
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws UnsupportedEncodingException
+     */
+    @RequestMapping(value = "/getObject.from", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    public @ResponseBody
+    Object getObject(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+        final Cookie[] cookies = request.getCookies();
+        String merchantName = "";
+        if (cookies != null) {
+            for (final Cookie cookie : cookies) {
+                if ("merchantName".equals(cookie.getName())) {
+                    merchantName = cookie.getValue();
+                }
+            }
+        }
+        List<Object_1> object_1s = new ArrayList<>();
+        object_1s = objectService.getObjectList(merchantName);
+        String res = JSON.toJSONString(object_1s);
+        logger.info(res);
+        return res;
+    }
 }

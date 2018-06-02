@@ -37,4 +37,9 @@ public class ObjectServiceImpl implements IObjectService{
     public int insertSubObject(List<ObjectInfo> objectInfos) {
         return objectMapper.insertSubObject(objectInfos);
     }
+
+    @Override
+    public List<Object_1> getObjectList(String merchantName) {
+        return objectMapper.getObjectList(merchantName);
+    }
 }
