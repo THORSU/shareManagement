@@ -54,7 +54,7 @@ public class MerchantController {
         //获取redis
         Merchant rest = managerRedisService.getMerchant(merchantName);
         if (rest != null) {
-            if (rest.getMerchantPassword().equals(merchantPassword)) {
+            if (rest.getMerchantPassword().equals(merchantPassword) && rest.getMerchantStatus().equals("1")) {
                 logger.info("redis登录成功");
                 //向浏览器添加cookie
                 Cookie name = new Cookie("merchantName", rest.getMerchantName());
@@ -69,7 +69,7 @@ public class MerchantController {
             //sql登录
             Merchant res = merchantService.merchantLogin(merchant);
             if (res != null) {
-                if (merchantPassword.equals(res.getMerchantPassword())) {
+                if (merchantPassword.equals(res.getMerchantPassword()) || res.getMerchantStatus().equals("1")) {
                     logger.info("mysql登录成功");
                     //向浏览器添加cookie
                     Cookie name = new Cookie("merchantName", rest.getMerchantName());
@@ -109,11 +109,13 @@ public class MerchantController {
         } else {
             merchant.setMerchantName(merchantName);
             merchant.setMerchantPassword(merchantPassword);
-            Merchant res = merchantService.merchantLogin(merchant);
+            //默认未被审核
+            merchant.setMerchantStatus("0");
+            Merchant res = merchantService.getMerchant(merchant);
             if (res == null) {
                 int num = merchantService.merchantSignUp(merchant);
                 logger.info("mysql添加成功");
-                Merchant rest = merchantService.merchantLogin(merchant);
+                Merchant rest = merchantService.getMerchant(merchant);
                 //redis添加
                 managerRedisService.addMerchant(rest);
                 logger.info("redis添加成功");

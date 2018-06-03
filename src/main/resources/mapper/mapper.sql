@@ -102,7 +102,8 @@ CREATE TABLE Merchant
 (
   id                INT AUTO_INCREMENT PRIMARY KEY,
   merchant_name     VARCHAR(20) NOT NULL,
-  merchant_password VARCHAR(20) NOT NULL
+  merchant_password VARCHAR(20) NOT NULL,
+  merchant_status   varchar(20) not null
 )
   COMMENT '商家表'
   ENGINE = InnoDB

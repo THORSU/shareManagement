@@ -5,13 +5,17 @@
 <mapper namespace="com.share.mapper.MerchantMapper">
     <!--商家登录-->
     <select id="merchantLogin" parameterType="com.share.pojo.Merchant" resultType="com.share.pojo.Merchant">
-        SELECT * FROM Merchant WHERE merchant_name=#{merchantName}
+        SELECT * FROM Merchant WHERE merchant_name=#{merchantName} and merchant_status=1
     </select>
     <!--商家注册-->
     <insert id="merchantSignUp" parameterType="com.share.pojo.Merchant">
         INSERT INTO Merchant
-         (merchant_name,merchant_password)
+         (merchant_name,merchant_password,merchant_status)
          VALUES
-         (#{merchantName},#{merchantPassword})
+         (#{merchantName},#{merchantPassword},#{merchantStatus})
     </insert>
+    <!--获取商家-->
+    <select id="getMerchant" parameterType="com.share.pojo.Merchant" resultType="com.share.pojo.Merchant">
+        SELECT * FROM Merchant WHERE merchant_name=#{merchantName}
+    </select>
 </mapper>

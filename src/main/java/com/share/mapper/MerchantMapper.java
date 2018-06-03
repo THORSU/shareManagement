@@ -22,4 +22,12 @@ public interface MerchantMapper {
      * @return
      */
     public int merchantSignUp(Merchant merchant);
+
+    /**
+     * 获取merchant
+     *
+     * @param merchant
+     * @return
+     */
+    public Merchant getMerchant(Merchant merchant);
 }

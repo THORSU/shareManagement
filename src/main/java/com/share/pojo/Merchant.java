@@ -11,6 +11,16 @@ public class Merchant {
     private String merchantName;
     //商家密码
     private String merchantPassword;
+    //状态位
+    private String merchantStatus;
+
+    public String getMerchantStatus() {
+        return merchantStatus;
+    }
+
+    public void setMerchantStatus(String merchantStatus) {
+        this.merchantStatus = merchantStatus;
+    }
 
     public String getId() {
         return id;

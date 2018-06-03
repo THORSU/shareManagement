@@ -24,4 +24,9 @@ public class MerchantServiceImpl implements IMerchantService {
     public int merchantSignUp(Merchant merchant) {
         return merchantMapper.merchantSignUp(merchant);
     }
+
+    @Override
+    public Merchant getMerchant(Merchant merchant) {
+        return merchantMapper.getMerchant(merchant);
+    }
 }
